@@ -1,15 +1,16 @@
 function snap() {
 	fetch("https://jsonplaceholder.typicode.com/posts/")
-		.then(response => {
+		.then(function(response , failure)  {
+			console.log(response);
 			//catch any requests that aren't 200 OK
 			if(response.status !== 200) {
 				alert('Sorry. Something happened. :-( Status Code: '.response.status);
 				return;
 			}
 
-			response.json().then(data => {
+			response.json().then(function(data) {
 				console.log(data);
-				document.getElementById("crackle").innerHTML  = data.map(result =>
+				const results = data.map(result =>
 					 `
 						<div class="card">
 							<div class="card-body">
@@ -18,6 +19,9 @@ function snap() {
     						</div>
     					</div>`
 				);
+
+				console.log(results)
+				document.getElementById("crackle").innerHTML = results;
 
 			});
 		})
